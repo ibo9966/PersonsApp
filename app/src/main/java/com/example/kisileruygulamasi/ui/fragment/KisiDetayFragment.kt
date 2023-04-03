@@ -6,34 +6,41 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.kisileruygulamasi.R
 import com.example.kisileruygulamasi.databinding.FragmentKisiDetayBinding
+import com.example.kisileruygulamasi.ui.viewmodel.AnasayfaViewModel
+import com.example.kisileruygulamasi.ui.viewmodel.KisiDetayViewModel
+import com.example.kisileruygulamasi.ui.viewmodel.KisiKayitViewModel
 
 class KisiDetayFragment : Fragment() {
     private lateinit var tasarim: FragmentKisiDetayBinding
+    private lateinit var viewModel: KisiDetayViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        tasarim = FragmentKisiDetayBinding.inflate(inflater, container, false)
-
-        tasarim.toolbarKisiDetay.title = "Kişi Detay"
+        tasarim = DataBindingUtil.inflate(inflater,R.layout.fragment_kisi_detay, container, false)
+        tasarim.kisiDetayFragment=this
+        tasarim.kisiDetayToolbarBaslik = "Kişi Detay"
 
         val bundle:KisiDetayFragmentArgs by navArgs()
         val gelenKisi = bundle.kisi
 
-        tasarim.editTextKisiAd.setText(gelenKisi.kisi_ad)
-        tasarim.editTextKisiTel.setText(gelenKisi.kisi_tel)
+        tasarim.kisiNesnesi=gelenKisi
 
-        tasarim.buttonGuncelle.setOnClickListener {
-            val kisi_ad=tasarim.editTextKisiAd.text.toString()
-            val kisi_tel=tasarim.editTextKisiTel.text.toString()
-            guncelle(gelenKisi.kisi_id,kisi_ad, kisi_tel)
 
-        }
         return tasarim.root
     }
 
-    fun guncelle(kisi_id:Int,kisi_ad:String, kisi_tel :String){
-        Log.e("Kişi Güncelle", "$kisi_id - $kisi_ad - $kisi_tel")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val tempViewModel : KisiDetayViewModel by viewModels()
+        viewModel = tempViewModel
+    }
+
+    fun buttonGuncelle(kisi_id:Int,kisi_ad:String, kisi_tel :String){
+        viewModel.guncelle(kisi_id,kisi_ad,kisi_tel)
     }
 }
