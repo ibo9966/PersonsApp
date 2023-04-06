@@ -86,7 +86,7 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener{
 
     override fun onResume() {
         super.onResume()
-        Log.e("Kişi Anasayfa","Dönüldü")
+        viewModel.kisileriYukle()
     }
 
 
