@@ -5,10 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kisileruygulamasi.data.Kisiler
 import com.example.kisileruygulamasi.data.repo.KisilerDaoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AnasayfaViewModel : ViewModel() {
+@HiltViewModel
+class AnasayfaViewModel @Inject constructor(var krepo:KisilerDaoRepository): ViewModel() {
 
-    val krepo= KisilerDaoRepository()
+
     var kisilerListesi= MutableLiveData<List<Kisiler>>()
 
     init {

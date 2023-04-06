@@ -18,8 +18,10 @@ import com.example.kisileruygulamasi.databinding.FragmentAnasayfaBinding
 import com.example.kisileruygulamasi.ui.adapter.KisilerAdapter
 import com.example.kisileruygulamasi.ui.viewmodel.AnasayfaViewModel
 import com.example.kisileruygulamasi.ui.viewmodel.KisiKayitViewModel
+import com.example.kisileruygulamasi.util.gecisYap
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener{
 
     private lateinit var tasarim : FragmentAnasayfaBinding
@@ -67,7 +69,7 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener{
     }
 
     fun fabTikla(it:View){
-        Navigation.findNavController(it).navigate(R.id.kisiKayitGecis)
+        Navigation.gecisYap(it,R.id.kisiKayitGecis)
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {

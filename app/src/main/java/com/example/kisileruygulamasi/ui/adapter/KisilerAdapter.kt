@@ -12,6 +12,7 @@ import com.example.kisileruygulamasi.data.Kisiler
 import com.example.kisileruygulamasi.databinding.CardTasarimBinding
 import com.example.kisileruygulamasi.ui.fragment.AnasayfaFragmentDirections
 import com.example.kisileruygulamasi.ui.viewmodel.AnasayfaViewModel
+import com.example.kisileruygulamasi.util.gecisYap
 import com.google.android.material.snackbar.Snackbar
 
 class KisilerAdapter (var mContext: Context,
@@ -40,7 +41,7 @@ class KisilerAdapter (var mContext: Context,
         t.kisiNesnesi=kisi
         t.satirCard.setOnClickListener {
             val gecis = AnasayfaFragmentDirections.kisiDetayGecis(kisi=kisi)
-            Navigation.findNavController(it).navigate(gecis)
+            Navigation.gecisYap(it,gecis)
         }
         t.imageViewSil.setOnClickListener {
             Snackbar.make(it,"${kisi.kisi_ad} silinsin mi?",Snackbar.LENGTH_LONG)

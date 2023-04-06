@@ -10,7 +10,7 @@ class KisilerDaoRepository {
     init {
         kisilerListesi=MutableLiveData()
     }
-    fun kisileriGetir(): MutableLiveData<List<Kisiler>{
+    fun kisileriGetir(): MutableLiveData<List<Kisiler>>{
         return kisilerListesi
     }
 
